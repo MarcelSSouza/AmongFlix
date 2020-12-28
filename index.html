@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css "
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/ico" href="./assets/among_us_netflix_icon_156927.ico"/>
+    <link rel="stylesheet" href="./index.css"/>
+    <title>Projeto_Final_ITW</title>
+  </head>
+  <body>
+      <div class="navbar sticky-top navbar-expand-lg navbar-light bg-danger ">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav w-100 d-flex justify-content-around">
+              <a class="nav-link" style="color: white; " class="menu" href="#">Home</a>
+              <a class="nav-link" style="color: white; " class="menu" href="#pesquisa">Pesquise</a>
+              <a class="nav-link" style="color: white; " class="menu" href="#contato">Contate-nos</a>
+            </div>
+                </div>
+        </div>
+      </div>
+    </div>
+    <img class="image_principal" src="./assets/among_us_netflix_icon_156927.png" alt="among us netflix">
+    <div id="pesquisa">
+      <form action="GET" class="d-flex flex-column">
+          <h3>Pesquise um ator, diretor ou filme de sua preferência e aprenda mais sobre ele! </h3>
+          <div class="mb-3">
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o que buscas">
+          </div>
+        <button type="submit" class="btn btn-danger botao_pesquisar">Pesquisar</button>
+      </form>
+        
+    </div>
+      <form id="contato" class="d-flex flex-column" action="POST">
+        <div class="mb-3"  >
+          <label for="exampleFormControlInput1" class="form-label"
+          >Seu e-mail</label
+          >
+        <input
+          type="email"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="name@example.com"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label"
+          >Mensagem</label
+        >
+        <textarea
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="3"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-danger">Enviar</button>
+    </form>
+    <div class="text-center p-3 text-white" >
+      © 2020 Copyright:
+      <a class="text-white" href="https://github.com/MarcelSSouza">Marcel</a>
+      e Daniel - Universidade de Aveiro
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
