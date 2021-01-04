@@ -8,6 +8,7 @@ var descricao;
 var actors;
 var categories;
 var directors;
+var type;
 document.getElementById("botao_pesquisar").addEventListener("click", function (event) {
     event.preventDefault()
 });
@@ -20,13 +21,14 @@ $('#botao_pesquisar').click(function (event) {
         url: `http://192.168.160.58/netflix/api/Search/Titles?name=${pesquisa}`,
         type: 'GET',
         crossDomain: true,
-        async: false
-    })
-        .done(function (msg) {
+        async: false,
+         success: (function (msg) {
             var id_filme = msg[0].Id
             console.log(id_filme)
             id = id_filme;
         })
+    })
+
     $.ajax({
         url: `http://192.168.160.58/netflix/api/Titles/${parseInt(id)}`,
         type: 'GET',
@@ -39,23 +41,34 @@ $('#botao_pesquisar').click(function (event) {
             rating = res.Rating.Id
             actors = res.Actors
             directors = res.Directors
-            categories= res.Categories
-            console.log(descricao)
-            console.log(data_lancamento)
-            console.log(duration)
-            console.log(rating)
-            console.log(actors)
+            categories = res.Categories
+            type = res.Type.Name
+            $("#body_1").html(descricao)
+            $("#body_2").html(data_lancamento)
+            $("#body_3").html(duration)
+            $("#body_4").html(rating)
+            $("#body_5").html(type)
             actors.forEach(element => {
-                console.log(element.Name)
+
+                $("#body_6").html(element.Name)
+ 
+
             });
             directors.forEach(element => {
-                console.log(element.Name)
+                $("#body_7").html(element.Name)
+
             });
             categories.forEach(element => {
-                console.log(element.Name)
+                $("#body_8").html(element.Name)
+
             });
+        },
+        error: () => {
+          
         }
     });
+    $('#dados').removeClass('d-none');
+
 
 
 })
