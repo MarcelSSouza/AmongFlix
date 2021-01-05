@@ -1,4 +1,7 @@
-$().ready(function () {
+function show(event){
+    alert(event)
+
+}$().ready(function () {
     $.ajax({
         url: `http://192.168.160.58/netflix/api/Statistics`,
         type: 'GET',
@@ -176,4 +179,5 @@ $().ready(function () {
         }
 
     })
+
 })
