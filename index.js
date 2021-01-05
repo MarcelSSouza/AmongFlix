@@ -1,5 +1,17 @@
 $().ready(function () {
+    $.ajax({
+        url: `http://192.168.160.58/netflix/api/Statistics`,
+        type: 'GET',
+        crossDomain: true,
+        async: false,
 
+    }).done(function (msg) {
+        console.log(msg)
+        $('#card_1').html(msg.Titles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+        $('#card_2').html(msg.Actors.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+        $('#card_3').html(msg.Directors.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+        $('#card_4').html(msg.Countries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
+    })
     //API PARA O MTDB 92f029772ce90437c0b15ee1c2488cf3
     jQuery.support.cors = true;
     var id = 0;
@@ -50,6 +62,7 @@ $().ready(function () {
                 crossDomain: true,
                 async: false,
                 success: function (res) {
+
                     descricao = res.Description
                     data_lancamento = res.ReleaseYear
                     duration = res.Duration
@@ -65,19 +78,18 @@ $().ready(function () {
                     $("#body_3").html(duration)
                     $("#body_4").html(rating)
                     $("#body_5").html(type)
-                    var actors_body = document.getElementById('body_6')
                     actors.forEach(element => {
-                        actors_body.innerHTML = `<li>${element.Name}</li>`
+                        $("#body_6").html($("#body_6").html() + '<li>' + element.Name + '</li>')
 
                     });
                     directors.forEach(element => {
-                        $("#body_7").html(element.Name)
+
+                        $("#body_7").html($("#body_7").html() + '<li>' + element.Name + '</li>')
                         console.log(element.Name)
 
                     });
                     categories.forEach(element => {
-                        $("#body_8").html(element.Name)
-
+                        $("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')
                     });
                 },
 
@@ -97,6 +109,7 @@ $().ready(function () {
 
             }).done(function (msg) {
                 var id_actor = msg[0].Id
+
                 console.log(id_actor)
                 id = id_actor;
             })
@@ -107,15 +120,14 @@ $().ready(function () {
                 crossDomain: true,
                 async: false,
                 success: function (res) {
-                    console.log(res)
+
                     var actors_movies = res.Titles
-                    console.log("🚀 ~ file: index.js ~ line 103 ~ actors_movies", actors_movies)
+
                     actors_movies.forEach(element => {
-                        $('#body_9').html(element.Name)
+                        $('#body_9').html($('#body_9').html() + '<li>' + element.Name + '</li>')
                         $('#title2').html(res.Name + ' Movies')
                     })
                     $('#dados2').removeClass('d-none');
-
 
                 }
             })
@@ -133,6 +145,7 @@ $().ready(function () {
 
             }).done(function (msg) {
                 var id_director = msg[0].Id
+
                 console.log(id_director)
                 id = id_director;
 
@@ -144,10 +157,11 @@ $().ready(function () {
                 crossDomain: true,
                 async: false,
                 success: function (res) {
+
                     console.log(res)
                     var director_movies = res.Titles
                     director_movies.forEach(element => {
-                        $('#body_10').html(element.Name)
+                        $('#body_10').html($('#body_10').html() + '<li>' + element.Name + '</li>')
                         $('#title3').html(res.Name + ' Movies')
 
                     })
