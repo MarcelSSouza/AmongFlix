@@ -1,6 +1,5 @@
 $().ready(function () {
 
-
     //API PARA O MTDB 92f029772ce90437c0b15ee1c2488cf3
     jQuery.support.cors = true;
     var id = 0;
@@ -24,6 +23,15 @@ $().ready(function () {
     $('#botao_pesquisar').click(function (event) {
         var pesquisa = $('#pesquisa_input').val()
         if (filme_radio.checked == true) {
+
+            $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
+                if (json != "Nothing found.") {
+                    console.log(json);
+                    $('#poster').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
+                }
+            })
+            $('#dados3').addClass('d-none');
+            $('#dados2').addClass('d-none');
             $.ajax({
                 url: `http://192.168.160.58/netflix/api/Search/Titles?name=${pesquisa}`,
                 type: 'GET',
@@ -50,7 +58,7 @@ $().ready(function () {
                     directors = res.Directors
                     categories = res.Categories
                     type = res.Type.Name
-                   if (filme_radio.checked == true)  title = res.Name
+                    if (filme_radio.checked == true) title = res.Name
                     $("#title").html(title + '<br>Description')
                     $("#body_1").html(descricao)
                     $("#body_2").html(data_lancamento)
@@ -60,7 +68,7 @@ $().ready(function () {
                     var actors_body = document.getElementById('body_6')
                     actors.forEach(element => {
                         actors_body.innerHTML = `<li>${element.Name}</li>`
-                        console.log("🚀 ~ file: index.js ~ line 57 ~ element.Name ", element.Name)
+
                     });
                     directors.forEach(element => {
                         $("#body_7").html(element.Name)
@@ -75,9 +83,12 @@ $().ready(function () {
 
             });
             $('#dados').removeClass('d-none');
+
         }
 
-        if(ator_radio.checked == true){
+        if (ator_radio.checked == true) {
+            $('#dados').addClass('d-none');
+            $('#dados3').addClass('d-none');
             $.ajax({
                 url: `http://192.168.160.58/netflix/api/Search/Actors?name=${pesquisa}`,
                 type: 'GET',
@@ -96,11 +107,24 @@ $().ready(function () {
                 crossDomain: true,
                 async: false,
                 success: function (res) {
-                   console.log(res) 
-        }
-        })}
+                    console.log(res)
+                    var actors_movies = res.Titles
+                    console.log("🚀 ~ file: index.js ~ line 103 ~ actors_movies", actors_movies)
+                    actors_movies.forEach(element => {
+                        $('#body_9').html(element.Name)
+                        $('#title2').html(res.Name + ' Movies')
+                    })
+                    $('#dados2').removeClass('d-none');
 
-        if(diretor_radio.checked == true){
+
+                }
+            })
+
+        }
+
+        if (diretor_radio.checked == true) {
+            $('#dados').addClass('d-none');
+            $('#dados2').addClass('d-none');
             $.ajax({
                 url: `http://192.168.160.58/netflix/api/Search/Directors?name=${pesquisa}`,
                 type: 'GET',
@@ -111,28 +135,31 @@ $().ready(function () {
                 var id_director = msg[0].Id
                 console.log(id_director)
                 id = id_director;
+
             })
 
             $.ajax({
-                url: `http://192.168.160.58/netflix/api/Actors/${parseInt(id)}`,
+                url: `http://192.168.160.58/netflix/api/Directors/${parseInt(id)}`,
                 type: 'GET',
                 crossDomain: true,
                 async: false,
                 success: function (res) {
-                   console.log(res) 
+                    console.log(res)
+                    var director_movies = res.Titles
+                    director_movies.forEach(element => {
+                        $('#body_10').html(element.Name)
+                        $('#title3').html(res.Name + ' Movies')
+
+                    })
+
+                    $('#dados3  ').removeClass('d-none');
+
+                }
+
+            }
+
+            )
         }
-        })}
-        
-    
-
-
-
-
-
-
-
-
-
 
     })
-});
+})

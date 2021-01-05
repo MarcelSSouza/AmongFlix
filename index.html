@@ -35,14 +35,14 @@
   <div id="pesquisa">
     <h3 class="subtitulo_pagina" id="subtitulo">Pesquise um ator, diretor ou filme de sua preferência e aprenda mais
       sobre ele! </h3>
-    <form action="GET" id='form_radio'class="d-flex flex-column align-itens-center">
+    <form action="GET" id='form_radio' class="d-flex flex-column align-itens-center">
       <div class="mb-3">
         <input type="text" required class="form-control" id="pesquisa_input" placeholder="Digite o que buscas">
-      </div>  
-      <div class="radios d-flex flex-row justify-content-around mb-5">
+      </div>
+      <div class="radios d-flex flex-row justify-content-around mb-2  ">
 
         <div class="form-check active">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="filme_radio" value="option1" >
+          <input class="form-check-input" type="radio" name="exampleRadios" id="filme_radio" value="option1">
           <label class="form-check-label" for="exampleRadios1">
             Filme/Serie/TV
           </label>
@@ -62,7 +62,39 @@
         <button type="submit" id="botao_pesquisar" class="btn btn-danger botao_pesquisar">Pesquisar</button>
       </div>
     </form>
+
+    <div class="accordion accordion-flush d-none" id="dados3">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingNine">
+          <button id='title3' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseOne">
+
+          </button>
+        </h2>
+        <div id="flush-collapseNine" class="accordion-collapse collapse show" aria-labelledby="flush-headingNine"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body text-white" id="body_10"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion accordion-flush d-none" id="dados2">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTen">
+          <button id='title2' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseOne">
+
+          </button>
+        </h2>
+        <div id="flush-collapseTen" class="accordion-collapse collapse show" aria-labelledby="flush-headingTen"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body text-white" id="body_9"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="accordion accordion-flush d-none" id="dados">
+      <div id="poster"></div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
           <button id='title' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
@@ -146,7 +178,7 @@
         </h2>
         <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven"
           data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" >
+          <div class="accordion-body text-white">
             <ul id="body_7">
 
             </ul>
@@ -162,7 +194,7 @@
         </h2>
         <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight"
           data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" >
+          <div class="accordion-body text-white">
             <ul id="body_8">
             </ul>
           </div>
