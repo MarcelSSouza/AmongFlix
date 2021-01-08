@@ -37,7 +37,6 @@ function show(event) {
         type: 'GET',
         crossDomain: true,
         async: false,
-
     }).done(function (msg) {
         for(var i =0; i<50; i++){
             var nome_filme = msg.Titles[i].Name

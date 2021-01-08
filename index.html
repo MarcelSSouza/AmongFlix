@@ -41,15 +41,14 @@
 
 
   
-  <div id="pesquisa">
+  <div id="pesquisa" class="d-flex flex-column align-itens-center">
     <h3 class="subtitulo_pagina" id="subtitulo">Pesquise um ator, diretor ou filme de sua preferência e aprenda mais
       sobre ele! </h3>
 
-
-
-    <form action="GET" id='form_radio' class="d-flex flex-column align-itens-center">
+    <form action="GET" id='form_radio' >
       <div class="mb-3">
         <input type="text" required class="form-control" id="pesquisa_input" placeholder="Digite o que buscas">
+
       </div>
 
       <div class="radios d-flex flex-row justify-content-around mb-2  ">
@@ -236,6 +235,7 @@
     <button onclick="show('suspense')" class="btn btn-outline-danger">Suspense</button>
   </div>
 
+
   <h3 class="subtitulo_pagina" id="nossos_dados">Sabe qual o tamanho da nossa Database? Veja abaixo!</h3>
   <div class="container">
     <div class="row row-cols-sm-2   row-cols-md-4  mt-1 mb-5">
@@ -243,12 +243,14 @@
         <div class="card text-white text-center bg-danger mb-3" style="max-width: 18rem;">
           <div class="card-header">Titles</div>
           <div class="card-body">
-            <h5 class="card-title" id="card_1"></h5>
+            <h5 class="card-title" id="card_1"></h5> 
             <p class="card-text">é a quantidade atual de títulos na nossa Database.</p>
           </div>
         </div>
       </div>
       <div class="col">
+
+
 
         <div class="card text-white  text-center bg-danger mb-3" style="max-width: 18rem;">
           <div class="card-header">Actors</div>
@@ -259,6 +261,9 @@
         </div>
       </div>
       <div class="col">
+
+
+
 
         <div class="card text-white  text-center bg-danger mb-3" style="max-width: 18rem;">
           <div class="card-header">Directors</div>
@@ -280,6 +285,9 @@
     </div>
   </div>
 
+
+
+  
   <h3 class="subtitulo_pagina">Entre em contato conosco</h3>
   <form id="contato" class="d-flex flex-column" action="https://formspree.io/f/xeqppyrk" method="POST">
     <div class="mb-3">
