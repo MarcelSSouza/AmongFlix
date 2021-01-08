@@ -1,7 +1,56 @@
-function show(event){
-    alert(event)
+function show(event) {
+    var id = 0;
+    switch (event) {
+        case 'comedia':
+            id = 3
+            break;
+        case 'scifi':
+            id = 11
+            break;
+        case 'acao':
+            id = 1
+            break;
+        case 'documentario':
+            id = 13
+            break;
+        case 'drama':
+            id = 4
+            break;
+        case 'terror':
+            id = 9
+            break;
+        case 'romance':
+            id = 12
+            break;
+        case 'anime':
+            id = 20
+            break;
+        case 'kids':
+            id = 21
+            break;
+        case 'suspense':
+            id = 10
+            break;
+    }
+    $.ajax({
+        url: `http://192.168.160.58/netflix/api/Categories/${id}`,
+        type: 'GET',
+        crossDomain: true,
+        async: false,
 
-}$().ready(function () {
+    }).done(function (msg) {
+        for(var i =0; i<50; i++){
+            var nome_filme = msg.Titles[i].Name
+            console.log(nome_filme)
+        }
+        console.log(msg)
+
+    })
+}
+
+
+
+$().ready(function () {
     $.ajax({
         url: `http://192.168.160.58/netflix/api/Statistics`,
         type: 'GET',
@@ -9,7 +58,6 @@ function show(event){
         async: false,
 
     }).done(function (msg) {
-        console.log(msg)
         $('#card_1').html(msg.Titles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
         $('#card_2').html(msg.Actors.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
         $('#card_3').html(msg.Directors.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
@@ -98,6 +146,7 @@ function show(event){
 
             });
             $('#dados').removeClass('d-none');
+            
 
         }
 
