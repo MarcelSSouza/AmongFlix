@@ -87,12 +87,6 @@ $().ready(function () {
         var pesquisa = $('#pesquisa_input').val()
         if (filme_radio.checked == true) {
             $('#dados').addClass('d-none');
-            $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
-                if (json != "Nothing found.") {
-                    console.log(json);
-                    $('#poster').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
-                }
-            })
             $('#dados3').addClass('d-none');
             $('#dados2').addClass('d-none');
             $.ajax({
@@ -121,7 +115,7 @@ $().ready(function () {
                     directors = res.Directors
                     categories = res.Categories
                     type = res.Type.Name
-                    if (filme_radio.checked == true) title = res.Name
+                    title = res.Name
                     $("#title").html(title + '<br>Description')
                     $("#body_1").html(descricao)
                     $("#body_2").html(data_lancamento)
@@ -140,6 +134,14 @@ $().ready(function () {
                     });
                     categories.forEach(element => {
                         $("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')
+
+
+                        $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
+                            if ((json != "Nothing found.") && (json.results[0].original_title == title)) {
+                                console.log(json);
+                                $('#poster').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
+                            }
+                        })
                     });
                 },
 
@@ -173,12 +175,18 @@ $().ready(function () {
 
                     var actors_movies = res.Titles
                     if ((res.Name + ' Movies') != $('#title2').html()) {
-
+                        $('#body_9').html('')
                         actors_movies.forEach(element => {
                             $('#body_9').html($('#body_9').html() + '<li>' + element.Name + '</li>')
                             $('#title2').html(res.Name + ' Movies')
                         })
                     }
+                    $.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
+                        if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
+                            console.log(json);
+                            $('#poster2').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
+                        }
+                    })
                     $('#dados2').removeClass('d-none');
 
 
@@ -220,16 +228,21 @@ $().ready(function () {
                             $('#title3').html(res.Name + ' Movies')
 
                         })
+                        $.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
+                            if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
+                                console.log(json);
+                                $('#poster3').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
+                            }
+                        })
+
+                        $('#dados3  ').removeClass('d-none');
+
+
                     }
-
-                    $('#dados3  ').removeClass('d-none');
-
 
                 }
 
-            }
-
-            )
+            })
         }
 
     })
