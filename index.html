@@ -8,6 +8,7 @@
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
   <link rel="icon" type="image/ico" href="./assets/among_us_netflix_icon_156927.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="./index.css" />
   <title>AmongFlix</title>
 </head>
@@ -18,9 +19,10 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav w-100 d-flex justify-content-around">
 
-          <a class="nav-link text-light" style="font-family: 'amongfont2';" class="menu" href="#subtitulo">PESQUISE</a>
-          <a class="nav-link text-light" style="font-family: 'amongfont2';" class="menu" href="#contato">CONTATE-NOS</a>
-          <a class="nav-link text-light" style="font-family: 'amongfont2';" class="menu" href="#nossos_dados">NOSSOS DADOS</a>
+          <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu" href="#subtitulo">PESQUISE</a>
+          <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu" href="#contato">CONTATE-NOS</a>
+          <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu" href="#nossos_dados">NOSSOS
+            DADOS</a>
         </div>
       </div>
     </div>
@@ -28,15 +30,15 @@
   </div>
 
   <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-    <h2 class="titulo_pagina">AMONGFLIX</h2>
-    <img class="image_principal" src="./assets/among_us_netflix_icon_156927.png" alt="among us netflix">
+    <h2 class="titulo_pagina tracking-in-expand">AMONGFLIX</h2>
+    <img class="image_principal animation" src="./assets/among_us_netflix_icon_156927.png" alt="among us netflix">
   </div>
 
   <div id="pesquisa" class="d-flex flex-column align-itens-center">
-    <h3 class="subtitulo_pagina" id="subtitulo">Pesquise um ator, diretor ou filme de sua preferência e aprenda mais
+    <h3 class="subtitulo_pagina " id="subtitulo">Pesquise um ator, diretor ou filme de sua preferência e aprenda mais
       sobre ele! </h3>
 
-    <form action="GET" id='form_radio' >
+    <form action="GET" id='form_radio'>
       <div class="mb-3">
         <input type="text" required class="form-control" id="pesquisa_input" placeholder="Digite o que buscas">
 
@@ -82,7 +84,7 @@
     </div>
 
     <div class="accordion accordion-flush d-none" id="dados2">
-      <div id="poster2"></div>
+      <div class='animate__pulse' id="poster2"></div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingTen">
           <button id='title2' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
@@ -97,7 +99,7 @@
     </div>
 
     <div class="accordion accordion-flush d-none" id="dados">
-      <div id="poster"></div>
+      <div class='animate__pulse' id="poster"></div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
           <button id='title' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
@@ -208,33 +210,33 @@
 
   <h3 class="subtitulo_pagina" id="nossos_dados">Nossas principais categorias</h3>
   <div class="d-flex justify-content-around flex-wrap mb-5 mt-5">
-    <button onclick="show('comedia')" class="btn btn-outline-danger">Comédia</button>
-    <button onclick="show('scifi')" class="btn btn-outline-danger">Sci-fi</button>
-    <button onclick="show('acao')" class="btn btn-outline-danger">Ação</button>
-    <button onclick="show('documentario')" class="btn btn-outline-danger">Documentário</button>
-    <button onclick="show('drama')" class="btn btn-outline-danger">Drama</button>
-    <button onclick="show('terror')" class="btn btn-outline-danger">Terror</button>
-    <button onclick="show('romance')" class="btn btn-outline-danger">Romance</button>
-    <button onclick="show('anime')" class="btn btn-outline-danger">Anime</button>
-    <button onclick="show('kids')" class="btn btn-outline-danger">Kids</button>
-    <button onclick="show('suspense')" class="btn btn-outline-danger">Suspense</button>
+    <button onclick="show('comedia')" class="btn btn-outline-danger animation">Comédia</button>
+    <button onclick="show('scifi')" class="btn btn-outline-danger  animation">Sci-fi</button>
+    <button onclick="show('acao')" class="btn btn-outline-danger  animation">Ação</button>
+    <button onclick="show('documentario')" class="btn btn-outline-danger  animation">Documentário</button>
+    <button onclick="show('drama')" class="btn btn-outline-danger  animation">Drama</button>
+    <button onclick="show('terror')" class="btn btn-outline-danger  animation">Terror</button>
+    <button onclick="show('romance')" class="btn btn-outline-danger  animation">Romance</button>
+    <button onclick="show('anime')" class="btn btn-outline-danger  animation">Anime</button>
+    <button onclick="show('kids')" class="btn btn-outline-danger  animation">Kids</button>
+    <button onclick="show('suspense')" class="btn btn-outline-danger  animation">Suspense</button>
   </div>
 
   <h3 class="subtitulo_pagina" id="nossos_dados">Sabe qual o tamanho da nossa database? Veja abaixo!</h3>
   <div class="container">
     <div class="row row-cols-sm-2   row-cols-md-4  mt-1 mb-5">
       <div class="col">
-        <div class="card text-white text-center bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card text-white text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
           <div class="card-header">Titles</div>
           <div class="card-body">
-            <h5 class="card-title" id="card_1"></h5> 
+            <h5 class="card-title" id="card_1"></h5>
             <p class="card-text">é a quantidade atual de títulos na nossa Database.</p>
           </div>
         </div>
       </div>
       <div class="col">
 
-        <div class="card text-white  text-center bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
           <div class="card-header">Actors</div>
           <div class="card-body">
             <h5 class="card-title" id="card_2"></h5>
@@ -244,7 +246,7 @@
       </div>
       <div class="col">
 
-        <div class="card text-white  text-center bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
           <div class="card-header">Directors</div>
           <div class="card-body">
             <h5 class="card-title" id="card_3"></h5>
@@ -253,7 +255,7 @@
         </div>
       </div>
       <div class="col">
-        <div class="card text-white  text-center bg-danger mb-3" style="max-width: 18rem;">
+        <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
           <div class="card-header">Countries</div>
           <div class="card-body">
             <h5 class="card-title" id="card_4"></h5>
