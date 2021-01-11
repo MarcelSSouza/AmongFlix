@@ -135,7 +135,6 @@ $().ready(function () {
                     categories.forEach(element => {
                         $("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')
 
-
                         $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
                             if ((json != "Nothing found.") && (json.results[0].original_title == title)) {
                                 console.log(json);
@@ -189,7 +188,6 @@ $().ready(function () {
                     })
                     $('#dados2').removeClass('d-none');
 
-
                 }
             })
 
@@ -236,7 +234,6 @@ $().ready(function () {
                         })
 
                         $('#dados3  ').removeClass('d-none');
-
 
                     }
 
