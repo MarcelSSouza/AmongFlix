@@ -38,7 +38,7 @@ function show(event) {
         crossDomain: true,
         async: false,
     }).done(function (msg) {
-        for(var i =0; i<50; i++){
+        for (var i = 0; i < 50; i++) {
             var nome_filme = msg.Titles[i].Name
             console.log(nome_filme)
         }
@@ -46,8 +46,9 @@ function show(event) {
 
     })
 }
-
-
+var pesquisa_ator = '';
+var pesquisa_anterior = '';
+var pesquisa_diretor = '';
 
 $().ready(function () {
     $.ajax({
@@ -85,7 +86,7 @@ $().ready(function () {
     $('#botao_pesquisar').click(function (event) {
         var pesquisa = $('#pesquisa_input').val()
         if (filme_radio.checked == true) {
-
+            $('#dados').addClass('d-none');
             $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
                 if (json != "Nothing found.") {
                     console.log(json);
@@ -102,7 +103,6 @@ $().ready(function () {
 
             }).done(function (msg) {
                 var id_filme = msg[0].Id
-                console.log(id_filme)
                 id = id_filme;
             })
 
@@ -145,12 +145,12 @@ $().ready(function () {
 
             });
             $('#dados').removeClass('d-none');
-            
 
         }
 
         if (ator_radio.checked == true) {
             $('#dados').addClass('d-none');
+            $('#dados2').addClass('d-none');
             $('#dados3').addClass('d-none');
             $.ajax({
                 url: `http://192.168.160.58/netflix/api/Search/Actors?name=${pesquisa}`,
@@ -161,7 +161,6 @@ $().ready(function () {
             }).done(function (msg) {
                 var id_actor = msg[0].Id
 
-                console.log(id_actor)
                 id = id_actor;
             })
 
@@ -173,12 +172,15 @@ $().ready(function () {
                 success: function (res) {
 
                     var actors_movies = res.Titles
+                    if ((res.Name + ' Movies') != $('#title2').html()) {
 
-                    actors_movies.forEach(element => {
-                        $('#body_9').html($('#body_9').html() + '<li>' + element.Name + '</li>')
-                        $('#title2').html(res.Name + ' Movies')
-                    })
+                        actors_movies.forEach(element => {
+                            $('#body_9').html($('#body_9').html() + '<li>' + element.Name + '</li>')
+                            $('#title2').html(res.Name + ' Movies')
+                        })
+                    }
                     $('#dados2').removeClass('d-none');
+
 
                 }
             })
@@ -187,6 +189,7 @@ $().ready(function () {
 
         if (diretor_radio.checked == true) {
             $('#dados').addClass('d-none');
+            $('#dados3').addClass('d-none');
             $('#dados2').addClass('d-none');
             $.ajax({
                 url: `http://192.168.160.58/netflix/api/Search/Directors?name=${pesquisa}`,
@@ -211,13 +214,16 @@ $().ready(function () {
 
                     console.log(res)
                     var director_movies = res.Titles
-                    director_movies.forEach(element => {
-                        $('#body_10').html($('#body_10').html() + '<li>' + element.Name + '</li>')
-                        $('#title3').html(res.Name + ' Movies')
+                    if ((res.Name + ' Movies') != $('#title3').html()) {
+                        director_movies.forEach(element => {
+                            $('#body_10').html($('#body_10').html() + '<li>' + element.Name + '</li>')
+                            $('#title3').html(res.Name + ' Movies')
 
-                    })
+                        })
+                    }
 
                     $('#dados3  ').removeClass('d-none');
+
 
                 }
 
