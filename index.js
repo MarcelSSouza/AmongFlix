@@ -1,3 +1,4 @@
+
 function show(event) {
     $('#badge_group').html('')
     var id = 0;
@@ -39,7 +40,8 @@ function show(event) {
         crossDomain: true,
         async: false,
     }).done(function (msg) {
-        for (var i = 0; i < 9; i++) {
+        var aleatorio = Math.floor((Math.random() * 100) + 1);
+        for (var i = aleatorio; i < aleatorio + 10; i++) {
             var nome_filme = msg.Titles[i].Name;
             $('#badge_group').append(`<span class="badge bg-danger mb-5" id="badge_1">${nome_filme}</span>`)
         }
@@ -82,6 +84,7 @@ $().ready(function () {
     var ator_radio = document.getElementById('ator_radio')
     var diretor_radio = document.getElementById('diretor_radio')
 
+    //implemetar a questao da pesquisa com buttons
     $('#botao_pesquisar').click(function (event) {
         var pesquisa = $('#pesquisa_input').val()
         if (filme_radio.checked == true) {
