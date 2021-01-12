@@ -39,7 +39,7 @@ function show(event) {
         crossDomain: true,
         async: false,
     }).done(function (msg) {
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 9; i++) {
             var nome_filme = msg.Titles[i].Name;
             $('#badge_group').append(`<span class="badge bg-danger mb-5" id="badge_1">${nome_filme}</span>`)
         }
