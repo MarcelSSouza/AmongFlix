@@ -1,4 +1,5 @@
 function show(event) {
+    $('#badge_group').html('')
     var id = 0;
     switch (event) {
         case 'comedia':
@@ -38,12 +39,10 @@ function show(event) {
         crossDomain: true,
         async: false,
     }).done(function (msg) {
-        for (var i = 0; i < 50; i++) {
-            var nome_filme = msg.Titles[i].Name
-            console.log(nome_filme)
+        for (var i = 0; i < 10; i++) {
+            var nome_filme = msg.Titles[i].Name;
+            $('#badge_group').append(`<span class="badge bg-danger mb-5" id="badge_1">${nome_filme}</span>`)
         }
-        console.log(msg)
-
     })
 }
 var pesquisa_ator = '';
@@ -172,6 +171,7 @@ $().ready(function () {
                 async: false,
                 success: function (res) {
 
+                    console.log(res)
                     var actors_movies = res.Titles
                     if ((res.Name + ' Movies') != $('#title2').html()) {
                         $('#body_9').html('')
