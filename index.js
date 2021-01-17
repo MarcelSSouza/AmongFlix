@@ -1,4 +1,29 @@
+//API PARA O MTDB 92f029772ce90437c0b15ee1c2488cf3
+jQuery.support.cors = true;
+var id = 0;
+var rating;
+var duration;
+var data_lancamento;
+var descricao;
+var actors;
+var categories;
+var directors;
+var type;
+var title;
 
+$(document).ready(function () {
+    $('#pesquisa_input').keypress(function (e) {
+        if (e.keyCode == 13) {
+            $('#botao_pesquisar').click();
+        }
+        document.getElementById("botao_pesquisar").addEventListener("click", function (event) {
+            event.preventDefault()
+        });
+        document.getElementById("botao_email").addEventListener("click", function (event) {
+            event.preventDefault()
+        });
+    });
+});
 function show(event) {
     $('#badge_group').html('')
     var id = 0;
@@ -64,22 +89,6 @@ $().ready(function () {
         $('#card_3').html(msg.Directors.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
         $('#card_4').html(msg.Countries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
     })
-    //API PARA O MTDB 92f029772ce90437c0b15ee1c2488cf3
-    jQuery.support.cors = true;
-    var id = 0;
-    var rating;
-    var duration;
-    var data_lancamento;
-    var descricao;
-    var actors;
-    var categories;
-    var directors;
-    var type;
-    var title;
-    document.getElementById("botao_pesquisar").addEventListener("click", function (event) {
-        event.preventDefault()
-    });
-
     var filme_radio = document.getElementById('filme_radio')
     var ator_radio = document.getElementById('ator_radio')
     var diretor_radio = document.getElementById('diretor_radio')
@@ -137,8 +146,8 @@ $().ready(function () {
                     categories.forEach(element => {
                         $("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')
 
-                        $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
-                            if ((json != "Nothing found.") && (json.results[0].original_title == title)) {
+                        $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + title + "&callback=?", function (json) {
+                            if ((json != "Nothing found.") && (json.results[0].title == title)) {
                                 console.log(json);
                                 $('#poster').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
                             }
@@ -176,6 +185,7 @@ $().ready(function () {
 
                     console.log(res)
                     var actors_movies = res.Titles
+                    var nome_actor = res.Name
                     if ((res.Name + ' Movies') != $('#title2').html()) {
                         $('#body_9').html('')
                         actors_movies.forEach(element => {
@@ -183,7 +193,7 @@ $().ready(function () {
                             $('#title2').html(res.Name + ' Movies')
                         })
                     }
-                    $.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
+                    $.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + nome_actor + "&callback=?", function (json) {
                         if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
                             console.log(json);
                             $('#poster2').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
@@ -223,20 +233,21 @@ $().ready(function () {
 
                     console.log(res)
                     var director_movies = res.Titles
+                    var nome = res.Name
                     if ((res.Name + ' Movies') != $('#title3').html()) {
                         director_movies.forEach(element => {
                             $('#body_10').html($('#body_10').html() + '<li>' + element.Name + '</li>')
                             $('#title3').html(res.Name + ' Movies')
 
                         })
-                        $.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + pesquisa + "&callback=?", function (json) {
+                        $.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + nome + "&callback=?", function (json) {
                             if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
                                 console.log(json);
                                 $('#poster3').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
                             }
                         })
 
-                        $('#dados3  ').removeClass('d-none');
+                        $('#dados3').removeClass('d-none');
 
                     }
 
