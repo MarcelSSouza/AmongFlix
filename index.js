@@ -11,6 +11,53 @@ var directors;
 var type;
 var title;
 
+// Load the Visualization API and the corechart package.
+google.charts.load('current', { 'packages': ['corechart'] });
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.charts.setOnLoadCallback(drawChart);
+$(window).resize(function () {
+    drawChart();
+});
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart() {
+
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([
+        ['Comédia', 1113],
+        ['Documentário', 668],
+        ['Scifi', 193],
+        ['Kids', 328],
+        ['Ação', 597],
+        ['Terror', 262],
+        ['Drama', 1623],
+        ['Romance', 376]
+    ]);
+
+    var options = {
+        'title': 'Os dados das suas Categorias preferidas',
+        'width': 360,
+        'height': 300,
+        is3D: true,
+        backgroundColor: { fill: 'transparent' },
+        legend: {
+            position: 'none', textStyle: { color: 'white', fontSize: 13 }
+        }
+    };
+
+
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+}
+
 $(document).ready(function () {
     $('#pesquisa_input').keypress(function (e) {
         if (e.keyCode == 13) {
@@ -24,6 +71,37 @@ $(document).ready(function () {
         });
     });
 });
+
+function fecharAlert(){
+    $("#alert").addClass('d-none')
+}
+
+$("#contato").submit(function (e) {
+    var email = $("#email").val()
+    var textArea = $("#textArea").val()
+    e.preventDefault();
+
+    var form = $(this);
+    var url = form.attr('action');
+    $.ajax({
+        url: url,
+        method: "POST",
+        dataType: "json",
+        data: {
+            email: email,
+            message: textArea
+        },
+        success: function (data) {
+            $("#alert").removeClass('d-none')
+            $("#email").val()
+            $("#textArea").val()
+               
+        }
+    });
+
+});
+
+
 function show(event) {
     $('#badge_group').html('')
     var id = 0;
@@ -65,6 +143,7 @@ function show(event) {
         crossDomain: true,
         async: false,
     }).done(function (msg) {
+        console.log(msg)
         var aleatorio = Math.floor((Math.random() * 100) + 1);
         for (var i = aleatorio; i < aleatorio + 10; i++) {
             var nome_filme = msg.Titles[i].Name;

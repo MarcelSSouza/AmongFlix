@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="./index.css" />
   <title>AmongFlix</title>
 </head>
+
 <body>
   <div class="navbar sticky navbar-expand navbar-light bg-danger ">
     <div class="container-fluid">
@@ -38,44 +40,43 @@
   <div id="pesquisa" class="d-flex flex-column align-itens-center">
     <h3 class="subtitulo_pagina " id="subtitulo">Pesquise um ator, diretor ou filme de sua preferência e aprenda mais
       sobre ele! </h3>
-<div class="container">
+    <div class="container">
 
-  <form action="GET" id='form_radio'>
-    <div class="mb-3">
-      <input type="text" required class="form-control" id="pesquisa_input" placeholder="Digite o que buscas">
-      
+      <form action="GET" id='form_radio'>
+        <div class="mb-3">
+          <input type="text" required class="form-control" id="pesquisa_input" style="text-align: center;"
+            placeholder="Digite o que buscas">
+        </div>
+        <div class="radios d-flex flex-row justify-content-around mb-2  ">
+          <div class="form-check active">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="filme_radio" value="option1">
+            <label class="form-check-label" for="exampleRadios1">
+              Título
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="ator_radio" value="option2">
+            <label class="form-check-label" for="exampleRadios2">
+              Ator
+            </label>
+          </div>
+          <div class="form-check ">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="diretor_radio" value="option3">
+            <label class="form-check-label" for="exampleRadios3">
+              Diretor
+            </label>
+          </div>
+          <button type="submit" id="botao_pesquisar" class="btn btn-danger botao_pesquisar">Pesquisar</button>
+        </div>
+      </form>
     </div>
-    
-    <div class="radios d-flex flex-row justify-content-around mb-2  ">
-      <div class="form-check active">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="filme_radio" value="option1">
-        <label class="form-check-label" for="exampleRadios1">
-          Título
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="ator_radio" value="option2">
-        <label class="form-check-label" for="exampleRadios2">
-          Ator
-        </label>
-      </div>
-      <div class="form-check ">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="diretor_radio" value="option3">
-        <label class="form-check-label" for="exampleRadios3">
-          Diretor
-        </label>
-      </div>
-      <button type="submit" id="botao_pesquisar" class="btn btn-danger botao_pesquisar">Pesquisar</button>
-    </div>
-  </form>
-</div>
-  
-  <div class="accordion accordion-flush d-none" id="dados3">
-    <div id="poster3"></div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="flush-headingNine">
-        <button id='title3' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-        data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseOne">
+
+    <div class="accordion accordion-flush d-none" id="dados3">
+      <div id="poster3"></div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingNine">
+          <button id='title3' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseOne">
 
           </button>
         </h2>
@@ -224,11 +225,9 @@
     <button onclick="show('kids')" class="btn btn-outline-danger  animation">Kids</button>
     <button onclick="show('suspense')" class="btn btn-outline-danger  animation">Suspense</button>
   </div>
-  
 
-    <div class="d-flex flex-row justify-content-around flex-wrap " id="badge_group">
+  <div class="d-flex flex-row justify-content-around flex-wrap " id="badge_group">
 
-    
   </div>
   <h3 class="subtitulo_pagina" id="nossos_dados">Sabe qual o tamanho da nossa database? Veja abaixo!</h3>
   <div class="container">
@@ -273,35 +272,43 @@
       </div>
     </div>
   </div>
+  <h3 class="subtitulo_pagina2" id="nossos_dados">Dados por Categoria</h3>
+  <div id="chart_div" class="d-flex justify-content-center"></div>
 
   <h3 class="subtitulo_pagina">Entre em contato conosco</h3>
-  <div class="container">
 
+  <div class="alert alert-danger alert-dismissible   d-none" id='alert' role="alert">
+    <strong>Ebaa!!</strong> Email enviado com sucesso!
+    <button button type="button" class="btn-close" onclick="fecharAlert()" data - bs - dismiss="alert" aria - label="Close"></button>
+  </div>
+
+  <div class="container">
     <form id="contato" class="d-flex flex-column" action="https://formspree.io/f/xeqppyrk" method="POST">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Seu e-mail
-          <input type="email" required class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"
-          name="_replyto" /></label>
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Mensagem
-            <textarea type="text" required name="message" class="form-control" id="exampleFormControlTextarea1"
-            rows="3"></textarea>
-          </div></label>
-          <button type="submit" value="Send" id='botao_email' class="btn btn-danger">Enviar</button>
-        </form>
-        <div class="text-center p-3 text-white">
-          © 2020 Copyright:
-          <a class="text-white" href="https://github.com/MarcelSSouza">Marcel</a>
-          e Daniel - Universidade de Aveiro
-        </div>
+          <input type="email" required class="form-control" id="email" style="text-align: center;"
+            placeholder="name@example.com" name="_replyto" /></label>
       </div>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Mensagem
+          <textarea type="text" required name="message" class="form-control" id="textArea" style="text-align: center;" placeholder="Digite aqui a sua mensagem" rows="3"></textarea>
+      </div></label>
+      <button type="submit" value="Send" id='botao_email' class="btn btn-danger">Enviar</button>
+    </form>
+    <div class="text-center p-3 text-white">
+      © 2020 Copyright:
+      <a class="text-white" href="https://github.com/MarcelSSouza">Marcel</a>
+      e Daniel - Universidade de Aveiro
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
   <script src="./index.js"></script>
 </body>
 
