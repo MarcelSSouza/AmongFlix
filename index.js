@@ -129,7 +129,6 @@ function chamada(id){
 	$('#dados').removeClass('d-none');
 }
 
-<<<<<<< HEAD
 $("#contato").submit(function (e) {
     var email = $("#email").val()
     var textArea = $("#textArea").val()
@@ -154,8 +153,6 @@ $("#contato").submit(function (e) {
     });
 
 });
-=======
->>>>>>> 0ee2eaf10976d3a60e2ec4d546ea8e8adaa0d608
 
 
 //Função que mostra filmes aleatórios de cada categoria
