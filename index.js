@@ -14,17 +14,18 @@ var pesquisa_ator = '';
 var pesquisa_anterior = '';
 var pesquisa_diretor = '';
 //Funcao pressionar enter
-$(document).ready(function () { 
+$(document).ready(function () {
+	document.getElementById("botao_pesquisar").addEventListener("click", function (event) {
+		event.preventDefault()
+	});
+	document.getElementById("botao_email").addEventListener("click", function (event) {
+		event.preventDefault()
+	});
 	$('#pesquisa_input').keypress(function (e) {
 		if (e.keyCode == 13) {
 			$('#botao_pesquisar').click();
 		}
-		document.getElementById("botao_pesquisar").addEventListener("click", function (event) {
-			event.preventDefault()
-		});
-		document.getElementById("botao_email").addEventListener("click", function (event) {
-			event.preventDefault()
-		});
+
 	});
 });
 //Funcao enviar email por AJAX
@@ -86,6 +87,50 @@ function drawChart() {
 	var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
 	chart.draw(data, options);
 }
+
+function chamada(id){
+	$("#resultado_botao").remove()
+	$.ajax({
+		url: `http://192.168.160.58/netflix/api/Titles/${parseInt(id)}`,
+		type: 'GET',
+		crossDomain: true,
+		async: false,
+		success: function (res) {
+			descricao = res.Description
+			data_lancamento = res.ReleaseYear
+			duration = res.Duration
+			rating = res.Rating.Id
+			actors = res.Actors
+			directors = res.Directors
+			categories = res.Categories
+			type = res.Type.Name
+			title = res.Name
+			$("#title").html(title + '<br>Description')
+			$("#body_1").html(descricao)
+			$("#body_2").html(data_lancamento)
+			$("#body_3").html(duration)
+			$("#body_4").html(rating)
+			$("#body_5").html(type)
+			actors.forEach(element => {
+				$("#body_6").html($("#body_6").html() + '<li>' + element.Name + '</li>')
+			});
+			directors.forEach(element => {
+				$("#body_7").html($("#body_7").html() + '<li>' + element.Name + '</li>')
+			});
+			categories.forEach(element => {
+				$("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')});
+			$.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + title + "&callback=?", function (json) {
+				if ((json != "Nothing found.") || (json.results[0] != undefined)) {
+					$('#poster').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
+				}
+			})
+			$('#pesquisa_input').val('')},
+		});
+	$('#dados').removeClass('d-none');
+}
+
+
+
 //Função que mostra filmes aleatórios de cada categoria
 function show(event) {
 	$('#badge_group').html('')
@@ -164,47 +209,17 @@ $('#botao_pesquisar').click(function (event) {
 			crossDomain: true,
 			async: false,
 		}).done(function (msg) {
-			var id_filme = msg[0].Id
-			id = id_filme;
-		})
-		$.ajax({
-			url: `http://192.168.160.58/netflix/api/Titles/${parseInt(id)}`,
-			type: 'GET',
-			crossDomain: true,
-			async: false,
-			success: function (res) {
-				descricao = res.Description
-				data_lancamento = res.ReleaseYear
-				duration = res.Duration
-				rating = res.Rating.Id
-				actors = res.Actors
-				directors = res.Directors
-				categories = res.Categories
-				type = res.Type.Name
-				title = res.Name
-				$("#title").html(title + '<br>Description')
-				$("#body_1").html(descricao)
-				$("#body_2").html(data_lancamento)
-				$("#body_3").html(duration)
-				$("#body_4").html(rating)
-				$("#body_5").html(type)
-				actors.forEach(element => {
-					$("#body_6").html($("#body_6").html() + '<li>' + element.Name + '</li>')
-				});
-				directors.forEach(element => {
-					$("#body_7").html($("#body_7").html() + '<li>' + element.Name + '</li>')
-				});
-				categories.forEach(element => {
-					$("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')});
-				$.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + title + "&callback=?", function (json) {
-					if ((json != "Nothing found.") && (json.results[0].title == title)) {
-						$('#poster').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
-					}
-				})
-				$('#pesquisa_input').val('')},
+			console.log(msg)
+			msg.forEach(function(element) {
+				var nome_filme_botao = element.Name
+				var id_filme = element.Id
+				$("#resultado_botao").append(`<button type="button" onclick="chamada(${id_filme})" class="btn btn-danger">${nome_filme_botao}</button>`)
 			});
-		$('#dados').removeClass('d-none');
+			
+		})
+
 	}
+
 	if (ator_radio.checked) {
 		$('#dados').addClass('d-none');
 		$('#dados2').addClass('d-none');
