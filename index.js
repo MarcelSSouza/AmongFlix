@@ -93,8 +93,8 @@ $("#contato").submit(function (e) {
         },
         success: function (data) {
             $("#alert").removeClass('d-none')
-            $("#email").val()
-            $("#textArea").val()
+            $("#email").val('')
+            $("#textArea").val('')
                
         }
     });
