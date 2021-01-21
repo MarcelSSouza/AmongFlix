@@ -18,9 +18,6 @@ $(document).ready(function () {
 	document.getElementById("botao_pesquisar").addEventListener("click", function (event) {
 		event.preventDefault()
 	});
-	document.getElementById("botao_email").addEventListener("click", function (event) {
-		event.preventDefault()
-	});
 	$('#pesquisa_input').keypress(function (e) {
 		if (e.keyCode == 13) {
 			$('#botao_pesquisar').click();
