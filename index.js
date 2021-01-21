@@ -89,7 +89,7 @@ function drawChart() {
 }
 
 function chamada(id){
-	$(".botoes_pesquisa").remove()
+	$("button").remove(".buttons_pesquisa")
 	$.ajax({
 		url: `http://192.168.160.58/netflix/api/Titles/${parseInt(id)}`,
 		type: 'GET',
@@ -196,6 +196,7 @@ var filme_radio = document.getElementById('filme_radio')
 var ator_radio = document.getElementById('ator_radio')
 var diretor_radio = document.getElementById('diretor_radio')
 $('#botao_pesquisar').click(function (event) {
+	$("button").remove(".buttons_pesquisa")
 	var pesquisa = $('#pesquisa_input').val()
 	if (filme_radio.checked) {
 		$('#dados').addClass('d-none');
@@ -211,7 +212,7 @@ $('#botao_pesquisar').click(function (event) {
 			msg.forEach(function(element) {
 				var nome_filme_botao = element.Name
 				var id_filme = element.Id
-				$("#resultado_botao").append(`<button type="button" onclick="chamada(${id_filme})" class="btn btn-danger mt-1 mb-1">${nome_filme_botao}</button>`)
+				$("#resultado_botao").append(`<button type="button" onclick="chamada(${id_filme})" class="btn btn-danger mt-1 mb-1 buttons_pesquisa">${nome_filme_botao}</button>`)
 			});
 			
 		})
