@@ -89,7 +89,7 @@ function drawChart() {
 }
 
 function chamada(id){
-	$("#resultado_botao").remove()
+	$(".botoes_pesquisa").remove()
 	$.ajax({
 		url: `http://192.168.160.58/netflix/api/Titles/${parseInt(id)}`,
 		type: 'GET',
@@ -128,32 +128,6 @@ function chamada(id){
 		});
 	$('#dados').removeClass('d-none');
 }
-
-$("#contato").submit(function (e) {
-    var email = $("#email").val()
-    var textArea = $("#textArea").val()
-    e.preventDefault();
-
-    var form = $(this);
-    var url = form.attr('action');
-    $.ajax({
-        url: url,
-        method: "POST",
-        dataType: "json",
-        data: {
-            email: email,
-            message: textArea
-        },
-        success: function (data) {
-            $("#alert").removeClass('d-none')
-            $("#email").val('')
-            $("#textArea").val('')
-               
-        }
-    });
-
-});
-
 
 //Função que mostra filmes aleatórios de cada categoria
 function show(event) {
@@ -200,7 +174,7 @@ function show(event) {
 		var aleatorio = Math.floor((Math.random() * 100) + 1);
 		for (var i = aleatorio; i < aleatorio + 10; i++) {
 			var nome_filme = msg.Titles[i].Name;
-			$('#badge_group').append(`<span class="badge bg-danger mb-5" id="badge_1">${nome_filme}</span>`)
+			$('#badge_group').append(`<span class="badge bg-danger mb-5 botoes_pesquisa" id="badge_1">${nome_filme}</span>`)
 		}
 	})
 }
@@ -237,7 +211,7 @@ $('#botao_pesquisar').click(function (event) {
 			msg.forEach(function(element) {
 				var nome_filme_botao = element.Name
 				var id_filme = element.Id
-				$("#resultado_botao").append(`<button type="button" onclick="chamada(${id_filme})" class="btn btn-danger">${nome_filme_botao}</button>`)
+				$("#resultado_botao").append(`<button type="button" onclick="chamada(${id_filme})" class="btn btn-danger mt-1 mb-1">${nome_filme_botao}</button>`)
 			});
 			
 		})
