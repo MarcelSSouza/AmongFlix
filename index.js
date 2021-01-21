@@ -43,13 +43,17 @@ $("#contato").submit(function (e) {
 		success: function (data) {
 			$("#alert").removeClass('d-none')
 			$("#email").val('')
-			$("#textArea").val('')  
+			$("#textArea").val('')
 		}
 	});
 });
 //Função fechar alert de e-mail
-function fecharAlert(){
+function fecharAlert() {
 	$("#alert").addClass('d-none')
+}
+//Função fechar alert de results
+function fecharAlert2() {
+	$("#alert2").addClass('d-none')
 }
 //GOOGLE CHARTS CONFIG//
 google.charts.load('current', { 'packages': ['corechart'] });
@@ -70,7 +74,7 @@ function drawChart() {
 		['Terror', 262],
 		['Drama', 1623],
 		['Romance', 376]
-		]);
+	]);
 	var options = {
 		'title': 'Os dados das suas Categorias preferidas',
 		'width': 360,
@@ -85,7 +89,7 @@ function drawChart() {
 	chart.draw(data, options);
 }
 
-function chamada(id){
+function chamada(id) {
 	$("button").remove(".buttons_pesquisa")
 	$.ajax({
 		url: `http://192.168.160.58/netflix/api/Titles/${parseInt(id)}`,
@@ -115,14 +119,16 @@ function chamada(id){
 				$("#body_7").html($("#body_7").html() + '<li>' + element.Name + '</li>')
 			});
 			categories.forEach(element => {
-				$("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')});
+				$("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')
+			});
 			$.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + title + "&callback=?", function (json) {
 				if ((json != "Nothing found.") || (json.results[0] != undefined)) {
 					$('#poster').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
 				}
 			})
-			$('#pesquisa_input').val('')},
-		});
+			$('#pesquisa_input').val('')
+		},
+	});
 	$('#dados').removeClass('d-none');
 }
 
@@ -132,35 +138,35 @@ function show(event) {
 	let id = 0;
 	switch (event) {
 		case 'comedia':
-		id = 3
-		break;
+			id = 3
+			break;
 		case 'scifi':
-		id = 11
-		break;
+			id = 11
+			break;
 		case 'acao':
-		id = 1
-		break;
+			id = 1
+			break;
 		case 'documentario':
-		id = 13
-		break;
+			id = 13
+			break;
 		case 'drama':
-		id = 4
-		break;
+			id = 4
+			break;
 		case 'terror':
-		id = 9
-		break;
+			id = 9
+			break;
 		case 'romance':
-		id = 12
-		break;
+			id = 12
+			break;
 		case 'anime':
-		id = 20
-		break;
+			id = 20
+			break;
 		case 'kids':
-		id = 21
-		break;
+			id = 21
+			break;
 		case 'suspense':
-		id = 10
-		break;
+			id = 10
+			break;
 	}
 	$.ajax({
 		url: `http://192.168.160.58/netflix/api/Categories/${id}`,
@@ -188,108 +194,126 @@ $().ready(function () {
 		$('#card_3').html(msg.Directors.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
 		$('#card_4').html(msg.Countries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
 	})
-//Barra de Pesquisa
-var filme_radio = document.getElementById('filme_radio')
-var ator_radio = document.getElementById('ator_radio')
-var diretor_radio = document.getElementById('diretor_radio')
-$('#botao_pesquisar').click(function (event) {
-	$("button").remove(".buttons_pesquisa")
-	var pesquisa = $('#pesquisa_input').val()
-	if (filme_radio.checked) {
-		$('#dados').addClass('d-none');
-		$('#dados3').addClass('d-none');
-		$('#dados2').addClass('d-none');
-		$.ajax({
-			url: `http://192.168.160.58/netflix/api/Search/Titles?name=${pesquisa}`,
-			type: 'GET',
-			crossDomain: true,
-			async: false,
-		}).done(function (msg) {
-			console.log(msg)
-			msg.forEach(function(element) {
-				var nome_filme_botao = element.Name
-				var id_filme = element.Id
-				$("#resultado_botao").append(`<button type="button" onclick="chamada(${id_filme})" class="btn btn-danger mt-1 mb-1 buttons_pesquisa">${nome_filme_botao}</button>`)
-			});
-			
-		})
-
-	}
-
-	if (ator_radio.checked) {
-		$('#dados').addClass('d-none');
-		$('#dados2').addClass('d-none');
-		$('#dados3').addClass('d-none');
-		$.ajax({
-			url: `http://192.168.160.58/netflix/api/Search/Actors?name=${pesquisa}`,
-			type: 'GET',
-			crossDomain: true,
-			async: false,
-		}).done(function (msg) {
-			var id_actor = msg[0].Id
-			id = id_actor;
-		})
-		$.ajax({
-			url: `http://192.168.160.58/netflix/api/Actors/${parseInt(id)}`,
-			type: 'GET',
-			crossDomain: true,
-			async: false,
-			success: function (res) {
-				var actors_movies = res.Titles
-				var nome_actor = res.Name
-				if ((res.Name + ' Movies') != $('#title2').html()) {
-					$('#body_9').html('')
-					actors_movies.forEach(element => {
-						$('#body_9').html($('#body_9').html() + '<li>' + element.Name + '</li>')
-						$('#title2').html(res.Name + ' Movies')
-					})
-				}
-				$.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + nome_actor + "&callback=?", function (json) {
-					if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
-						$('#poster2').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
-					}
-				})
-				$('#dados2').removeClass('d-none');
-				$('#pesquisa_input').val('')
-			}
-		})
-	}
-	if (diretor_radio.checked) {
-		$('#dados').addClass('d-none');
-		$('#dados3').addClass('d-none');
-		$('#dados2').addClass('d-none');
-		$.ajax({
-			url: `http://192.168.160.58/netflix/api/Search/Directors?name=${pesquisa}`,
-			type: 'GET',
-			crossDomain: true,
-			async: false,
-		}).done(function (msg) {
-			var id_director = msg[0].Id
-			id = id_director;
-		})
-		$.ajax({
-			url: `http://192.168.160.58/netflix/api/Directors/${parseInt(id)}`,
-			type: 'GET',
-			crossDomain: true,
-			async: false,
-			success: function (res) {
-				var director_movies = res.Titles
-				var nome = res.Name
-				if ((res.Name + ' Movies') != $('#title3').html()) {
-					director_movies.forEach(element => {
-						$('#body_10').html($('#body_10').html() + '<li>' + element.Name + '</li>')
-						$('#title3').html(res.Name + ' Movies')
-					})
-					$.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + nome + "&callback=?", function (json) {
-						if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
-							$('#poster3').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
-						}
-					})
-					$('#dados3').removeClass('d-none');
+	//Barra de Pesquisa
+	var filme_radio = document.getElementById('filme_radio')
+	var ator_radio = document.getElementById('ator_radio')
+	var diretor_radio = document.getElementById('diretor_radio')
+	$('#botao_pesquisar').click(function (event) {
+		$("button").remove(".buttons_pesquisa")
+		var pesquisa = $('#pesquisa_input').val()
+		if (filme_radio.checked) {
+			$('#dados').addClass('d-none');
+			$('#dados3').addClass('d-none');
+			$('#dados2').addClass('d-none');
+			$.ajax({
+				url: `http://192.168.160.58/netflix/api/Search/Titles?name=${pesquisa}`,
+				type: 'GET',
+				crossDomain: true,
+				async: false,
+			}).done(function (msg) {
+				var tam = msg.length
+				console.log(tam)
+				if (tam == 0) {
+					$("#alert2").removeClass('d-none')
 					$('#pesquisa_input').val('')
 				}
-			}
-		})
-	}
-})
+				console.log(msg)
+				msg.forEach(function (element) {
+					var nome_filme_botao = element.Name
+					var id_filme = element.Id
+					$("#resultado_botao").append(`<button type="button" onclick="chamada(${id_filme})" class="btn btn-danger mt-1 mb-1 buttons_pesquisa">${nome_filme_botao}</button>`)
+				});
+
+			})
+
+		}
+
+		if (ator_radio.checked) {
+			$('#dados').addClass('d-none');
+			$('#dados2').addClass('d-none');
+			$('#dados3').addClass('d-none');
+			$.ajax({
+				url: `http://192.168.160.58/netflix/api/Search/Actors?name=${pesquisa}`,
+				type: 'GET',
+				crossDomain: true,
+				async: false,
+			}).done(function (msg) {
+				tam = msg.length
+				console.log(tam)
+				if (tam == 0) {
+					$("#alert2").removeClass('d-none')
+					$('#pesquisa_input').val('')
+				}
+				var id_actor = msg[0].Id
+				id = id_actor;
+			})
+			$.ajax({
+				url: `http://192.168.160.58/netflix/api/Actors/${parseInt(id)}`,
+				type: 'GET',
+				crossDomain: true,
+				async: false,
+				success: function (res) {
+					var actors_movies = res.Titles
+					var nome_actor = res.Name
+					if ((res.Name + ' Movies') != $('#title2').html()) {
+						$('#body_9').html('')
+						actors_movies.forEach(element => {
+							$('#body_9').html($('#body_9').html() + '<li>' + element.Name + '</li>')
+							$('#title2').html(res.Name + ' Movies')
+						})
+					}
+					$.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + nome_actor + "&callback=?", function (json) {
+						if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
+							$('#poster2').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
+						}
+					})
+					$('#dados2').removeClass('d-none');
+					$('#pesquisa_input').val('')
+				}
+			})
+		}
+		if (diretor_radio.checked) {
+			$('#dados').addClass('d-none');
+			$('#dados3').addClass('d-none');
+			$('#dados2').addClass('d-none');
+			$.ajax({
+				url: `http://192.168.160.58/netflix/api/Search/Directors?name=${pesquisa}`,
+				type: 'GET',
+				crossDomain: true,
+				async: false,
+			}).done(function (msg) {
+				tam = msg.length
+				console.log(tam)
+				if (tam == 0) {
+					$("#alert2").removeClass('d-none')
+					$('#pesquisa_input').val('')
+				}
+				var id_director = msg[0].Id
+				id = id_director;
+			})
+			$.ajax({
+				url: `http://192.168.160.58/netflix/api/Directors/${parseInt(id)}`,
+				type: 'GET',
+				crossDomain: true,
+				async: false,
+				success: function (res) {
+					var director_movies = res.Titles
+					var nome = res.Name
+					if ((res.Name + ' Movies') != $('#title3').html()) {
+						director_movies.forEach(element => {
+							$('#body_10').html($('#body_10').html() + '<li>' + element.Name + '</li>')
+							$('#title3').html(res.Name + ' Movies')
+						})
+						$.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + nome + "&callback=?", function (json) {
+							if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
+								$('#poster3').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
+							}
+						})
+						$('#dados3').removeClass('d-none');
+						$('#pesquisa_input').val('')
+					}
+				}
+			})
+		}
+	})
 })

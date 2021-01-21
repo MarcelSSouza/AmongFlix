@@ -65,7 +65,11 @@
         </div>
       </form>
     </div>
-
+    <div class="alert alert-danger alert-dismissible   d-none" id='alert2' role="alert">
+      <strong>Poxa :( </strong> Nós não encontramos nenhum resultado para a sua pesquisa!
+      <button button type="button" class="btn-close" onclick="fecharAlert2()" data - bs - dismiss="alert" aria -
+        label="Close"></button>
+    </div>
 
     <div class="d-flex flex-row justify-content-around flex-wrap" id="resultado_botao"></div>
 
@@ -140,7 +144,7 @@
         <h2 class="accordion-header" id="flush-headingFour">
           <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
             data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-            Rating
+            Rating (0/10)
           </button>
         </h2>
         <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
