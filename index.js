@@ -14,7 +14,7 @@ var pesquisa_ator = '';
 var pesquisa_anterior = '';
 var pesquisa_diretor = '';
 //Funcao pressionar enter
-	$(document).ready(function () { 
+$(document).ready(function () { 
 	$('#pesquisa_input').keypress(function (e) {
 		if (e.keyCode == 13) {
 			$('#botao_pesquisar').click();
@@ -28,7 +28,7 @@ var pesquisa_diretor = '';
 	});
 });
 //Funcao enviar email por AJAX
-	$("#contato").submit(function (e) {
+$("#contato").submit(function (e) {
 	var email = $("#email").val()
 	var textArea = $("#textArea").val()
 	e.preventDefault();
@@ -49,19 +49,17 @@ var pesquisa_diretor = '';
 		}
 	});
 });
-
 //Função fechar alert de e-mail
-	function fecharAlert(){
+function fecharAlert(){
 	$("#alert").addClass('d-none')
 }
-
 //GOOGLE CHARTS CONFIG//
 google.charts.load('current', { 'packages': ['corechart'] });
-	google.charts.setOnLoadCallback(drawChart);
-	$(window).resize(function () {
-		drawChart();
-	});
-	function drawChart() {
+google.charts.setOnLoadCallback(drawChart);
+$(window).resize(function () {
+	drawChart();
+});
+function drawChart() {
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Topping');
 	data.addColumn('number', 'Slices');
@@ -137,7 +135,6 @@ function show(event) {
 		}
 	})
 }
-
 //Funcao dados gerais da API nos cards
 $().ready(function () {
 	$.ajax({
@@ -145,19 +142,17 @@ $().ready(function () {
 		type: 'GET',
 		crossDomain: true,
 		async: false,
-
 	}).done(function (msg) {
 		$('#card_1').html(msg.Titles.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
 		$('#card_2').html(msg.Actors.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
 		$('#card_3').html(msg.Directors.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
 		$('#card_4').html(msg.Countries.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
 	})
-
 //Barra de Pesquisa
-	var filme_radio = document.getElementById('filme_radio')
-	var ator_radio = document.getElementById('ator_radio')
-	var diretor_radio = document.getElementById('diretor_radio')
-	$('#botao_pesquisar').click(function (event) {
+var filme_radio = document.getElementById('filme_radio')
+var ator_radio = document.getElementById('ator_radio')
+var diretor_radio = document.getElementById('diretor_radio')
+$('#botao_pesquisar').click(function (event) {
 	var pesquisa = $('#pesquisa_input').val()
 	if (filme_radio.checked) {
 		$('#dados').addClass('d-none');
@@ -168,12 +163,10 @@ $().ready(function () {
 			type: 'GET',
 			crossDomain: true,
 			async: false,
-
 		}).done(function (msg) {
 			var id_filme = msg[0].Id
 			id = id_filme;
 		})
-
 		$.ajax({
 			url: `http://192.168.160.58/netflix/api/Titles/${parseInt(id)}`,
 			type: 'GET',
@@ -203,7 +196,6 @@ $().ready(function () {
 				});
 				categories.forEach(element => {
 					$("#body_8").html($("#body_8").html() + '<li>' + element.Name + '</li>')});
-
 				$.getJSON("https://api.themoviedb.org/3/search/movie?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + title + "&callback=?", function (json) {
 					if ((json != "Nothing found.") && (json.results[0].title == title)) {
 						$('#poster').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
@@ -213,7 +205,6 @@ $().ready(function () {
 			});
 		$('#dados').removeClass('d-none');
 	}
-
 	if (ator_radio.checked) {
 		$('#dados').addClass('d-none');
 		$('#dados2').addClass('d-none');
@@ -223,12 +214,10 @@ $().ready(function () {
 			type: 'GET',
 			crossDomain: true,
 			async: false,
-
 		}).done(function (msg) {
 			var id_actor = msg[0].Id
 			id = id_actor;
 		})
-
 		$.ajax({
 			url: `http://192.168.160.58/netflix/api/Actors/${parseInt(id)}`,
 			type: 'GET',
@@ -253,9 +242,7 @@ $().ready(function () {
 				$('#pesquisa_input').val('')
 			}
 		})
-
 	}
-
 	if (diretor_radio.checked) {
 		$('#dados').addClass('d-none');
 		$('#dados3').addClass('d-none');
@@ -265,44 +252,32 @@ $().ready(function () {
 			type: 'GET',
 			crossDomain: true,
 			async: false,
-
 		}).done(function (msg) {
 			var id_director = msg[0].Id
-
-
 			id = id_director;
-
 		})
-
 		$.ajax({
 			url: `http://192.168.160.58/netflix/api/Directors/${parseInt(id)}`,
 			type: 'GET',
 			crossDomain: true,
 			async: false,
 			success: function (res) {
-
-
 				var director_movies = res.Titles
 				var nome = res.Name
 				if ((res.Name + ' Movies') != $('#title3').html()) {
 					director_movies.forEach(element => {
 						$('#body_10').html($('#body_10').html() + '<li>' + element.Name + '</li>')
 						$('#title3').html(res.Name + ' Movies')
-
 					})
 					$.getJSON("https://api.themoviedb.org/3/search/person?api_key=92f029772ce90437c0b15ee1c2488cf3&query=" + nome + "&callback=?", function (json) {
 						if ((json != "Nothing found.") && (json.results[0].name == res.Name)) {
-
 							$('#poster3').html('</p><img style="display:block; margin: 0 auto; widht:auto; height:auto;  max-width:300px;" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].profile_path + '\" class=\"img-responsive\" >');
 						}
 					})
-
 					$('#dados3').removeClass('d-none');
 					$('#pesquisa_input').val('')
 				}
-
 			}
-
 		})
 	}
 })
