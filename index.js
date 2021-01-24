@@ -23,19 +23,22 @@ $(document).ready(function () {
 			$('#botao_pesquisar').click();
 		}
 	});
-});
-
+});	
+var tamanho_categoria;
 //Funcao dados por categoria
 function dados_categoria(id){
 	$.ajax({
 		url: `http://192.168.160.58/netflix/api/Categories/${id}`,
 		method: "GET",
 		dataType: "json",
+		async: false,
 		success: function (data) {
-			return data.Titles.length
+			tamanho_categoria = data.Titles.length
 		}
 	}); 
+	return tamanho_categoria
 }
+console.log(dados_categoria(3))
 //Funcoes paginacao
 function pagina(){
 	$("#all").addClass('d-none')
