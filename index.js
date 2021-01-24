@@ -22,9 +22,79 @@ $(document).ready(function () {
 		if (e.keyCode == 13) {
 			$('#botao_pesquisar').click();
 		}
-
 	});
 });
+
+//Funcao dados por categoria
+function dados_categoria(id){
+	$.ajax({
+		url: `http://192.168.160.58/netflix/api/Categories/${id}`,
+		method: "GET",
+		dataType: "json",
+		success: function (data) {
+			return data.Titles.length
+		}
+	}); 
+}
+//Funcoes paginacao
+function pagina(){
+	$("#all").addClass('d-none')
+	$("#filmes_paginados").removeClass('d-none')
+}
+function menu(){
+	$("#all").removeClass('d-none')
+	$("#filmes_paginados").addClass('d-none')
+}
+var pagina_selecionada = 1
+$.ajax({
+	url: `http://192.168.160.58/netflix/api/Titles?page=${pagina_selecionada}&pagesize=50`,
+	method: "GET",
+	dataType: "json",
+	success: function (data) {
+		data.Titles.forEach( function(element) {
+			$("#titles").append(`<tr><td>${element.Name}<br>${element.TypeName}</td><td>${element.Description}</td><td>${element.ReleaseYear}</td><tr>`)
+		});
+	}
+});
+function proximo(){
+	$('td').remove()
+	pagina_selecionada += 1
+	$.ajax({
+		url: `http://192.168.160.58/netflix/api/Titles?page=${pagina_selecionada}&pagesize=50`,
+		method: "GET",
+		dataType: "json",
+		success: function (data) {
+			if(data.HasPrevious){
+				$(".previous").removeClass('disabled');
+			}
+			if(data.HasNext == false){
+				$(".next").addClass('disabled');
+			}
+			data.Titles.forEach( function(element) {
+				$("#titles").append(`<tr><td>${element.Name}<br>${element.TypeName}</td><td>${element.Description}</td><td>${element.ReleaseYear}</td><tr>`)
+			});
+		}
+	});
+}
+function anterior(){
+	$('td').remove()
+	pagina_selecionada -= 1
+	$.ajax({
+		url: `http://192.168.160.58/netflix/api/Titles?page=${pagina_selecionada}&pagesize=50`,
+		method: "GET",
+		dataType: "json",
+		success: function (data) {
+			if(data.HasPrevious){
+				$(".previous").removeClass('disabled');
+			}else{
+				$(".previous").addClass('disabled');
+			}
+			data.Titles.forEach( function(element) {
+				$("#titles").append(`<tr><td>${element.Name}<br>${element.TypeName}</td><td>${element.Description}</td><td>${element.ReleaseYear}</td><tr>`)
+			});
+		}
+	});
+}
 //Funcao enviar email por AJAX
 $("#contato").submit(function (e) {
 	var email = $("#email").val()
@@ -61,20 +131,28 @@ google.charts.setOnLoadCallback(drawChart);
 $(window).resize(function () {
 	drawChart();
 });
+var comedia = dados_categoria(3)
+var documentario = dados_categoria(13)
+var scifi = dados_categoria(11)
+var kids = dados_categoria(21)
+var acao = dados_categoria(1)
+var terror = dados_categoria(9)
+var drama = dados_categoria(4)
+var romance = dados_categoria(12)
 function drawChart() {
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Topping');
 	data.addColumn('number', 'Slices');
 	data.addRows([
-		['Comédia', 1113],
-		['Documentário', 668],
-		['Scifi', 193],
-		['Kids', 328],
-		['Ação', 597],
-		['Terror', 262],
-		['Drama', 1623],
-		['Romance', 376]
-	]);
+		['Comédia', comedia],
+		['Documentário', documentario],
+		['Scifi', scifi],
+		['Kids', kids],
+		['Ação', acao],
+		['Terror', terror],
+		['Drama', drama],
+		['Romance', romance]
+		]);
 	var options = {
 		'title': 'Os dados das suas Categorias preferidas',
 		'width': 360,
@@ -88,7 +166,6 @@ function drawChart() {
 	var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
 	chart.draw(data, options);
 }
-
 function chamada(id) {
 	$("button").remove(".buttons_pesquisa")
 	$.ajax({
@@ -131,42 +208,41 @@ function chamada(id) {
 	});
 	$('#dados').removeClass('d-none');
 }
-
 //Função que mostra filmes aleatórios de cada categoria
 function show(event) {
 	$('#badge_group').html('')
 	let id = 0;
 	switch (event) {
 		case 'comedia':
-			id = 3
-			break;
+		id = 3
+		break;
 		case 'scifi':
-			id = 11
-			break;
+		id = 11
+		break;
 		case 'acao':
-			id = 1
-			break;
+		id = 1
+		break;
 		case 'documentario':
-			id = 13
-			break;
+		id = 13
+		break;
 		case 'drama':
-			id = 4
-			break;
+		id = 4
+		break;
 		case 'terror':
-			id = 9
-			break;
+		id = 9
+		break;
 		case 'romance':
-			id = 12
-			break;
+		id = 12
+		break;
 		case 'anime':
-			id = 20
-			break;
+		id = 20
+		break;
 		case 'kids':
-			id = 21
-			break;
+		id = 21
+		break;
 		case 'suspense':
-			id = 10
-			break;
+		id = 10
+		break;
 	}
 	$.ajax({
 		url: `http://192.168.160.58/netflix/api/Categories/${id}`,
@@ -223,11 +299,8 @@ $().ready(function () {
 					var id_filme = element.Id
 					$("#resultado_botao").append(`<button type="button" onclick="chamada(${id_filme})" class="btn btn-danger mt-1 mb-1 buttons_pesquisa">${nome_filme_botao}</button>`)
 				});
-
 			})
-
 		}
-
 		if (ator_radio.checked) {
 			$('#dados').addClass('d-none');
 			$('#dados2').addClass('d-none');

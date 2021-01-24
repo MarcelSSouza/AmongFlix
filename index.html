@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css " rel="stylesheet"
-    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+  integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
   <link rel="icon" type="image/ico" href="./assets/among_us_netflix_icon_156927.ico" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./index.css" />
   <title>AmongFlix</title>
 </head>
-
 <body>
   <div class="navbar sticky navbar-expand navbar-light bg-danger ">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav w-100 d-flex justify-content-around">
           <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu"
-            href="#nossos_dados">
-            DADOS</a>
-          <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu"
-            href="#subtitulo">PESQUISE</a>
-          <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu"
-            href="#contato">CONTATO</a>
-        </div>
+          href="#nossos_dados">
+        DADOS</a>
+        <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu"
+        href="#subtitulo">PESQUISE</a>
+        <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu"
+        href="#contato">CONTATO</a>
+        <a class="nav-link text-light tracking-in-expand" style="font-family: 'amongfont2';" class="menu" onclick="pagina()">TITLES</a>
       </div>
     </div>
   </div>
-  </div>
+</div>
+<div id="all">
   <div class="w-100 d-flex flex-column align-items-center">
     <h2 class="titulo_pagina tracking-in-expand">AMONGFLIX</h2>
     <img class="image_principal vibrate-3" src="./assets/among_us_netflix_icon_156927.png" alt="among us netflix">
@@ -40,7 +40,7 @@
       <form action="GET" id='form_radio'>
         <div class="mb-3">
           <input type="text" required class="form-control text-center" id="pesquisa_input"
-            placeholder="Digite o que buscas">
+          placeholder="Digite o que buscas">
         </div>
         <div class="radios d-flex flex-row justify-content-around mb-2  ">
           <div class="form-check active">
@@ -68,239 +68,251 @@
     <div class="alert alert-danger alert-dismissible   d-none" id='alert2' role="alert">
       <strong>Poxa :( </strong> Nós não encontramos nenhum resultado para a sua pesquisa!
       <button button type="button" class="btn-close" onclick="fecharAlert2()" data - bs - dismiss="alert" aria -
-        label="Close"></button>
+      label="Close"></button>
     </div>
-
     <div class="d-flex flex-row justify-content-around flex-wrap" id="resultado_botao"></div>
-
-
     <div class="accordion accordion-flush d-none" id="dados3">
       <div id="poster3"></div>
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingNine">
           <button id='title3' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseOne">
-          </button>
-        </h2>
-        <div id="flush-collapseNine" class="accordion-collapse collapse show" aria-labelledby="flush-headingNine"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" id="body_10"></div>
+          data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseOne">
+        </button>
+      </h2>
+      <div id="flush-collapseNine" class="accordion-collapse collapse show" aria-labelledby="flush-headingNine"
+      data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body text-white" id="body_10"></div>
+    </div>
+  </div>
+</div>
+<div class="accordion accordion-flush d-none" id="dados2">
+  <div class='animate__pulse' id="poster2"></div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTen">
+      <button id='title2' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+      data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseOne">
+    </button>
+  </h2>
+  <div id="flush-collapseTen" class="accordion-collapse collapse show" aria-labelledby="flush-headingTen"
+  data-bs-parent="#accordionFlushExample">
+  <div class="accordion-body text-white" id="body_9"></div>
+</div>
+</div>
+</div>
+<div class="accordion accordion-flush d-none" id="dados">
+  <div class='animate__pulse' id="poster"></div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button id='title' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+      data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+      Description
+    </button>
+  </h2>
+  <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+  data-bs-parent="#accordionFlushExample">
+  <div class="accordion-body text-white" id="body_1"></div>
+</div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingTwo">
+    <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+    Release Year
+  </button>
+</h2>
+<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+data-bs-parent="#accordionFlushExample">
+<div class="accordion-body text-white" id="body_2"></div>
+</div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingThree">
+    <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+    Duration
+  </button>
+</h2>
+<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+data-bs-parent="#accordionFlushExample">
+<div class="accordion-body text-white" id="body_3"></div>
+</div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingFour">
+    <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+    data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+    Rating (0/10)
+  </button>
+</h2>
+<div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+data-bs-parent="#accordionFlushExample">
+<div class="accordion-body text-white" id="body_4"></div>
+</div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingFive">
+    <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+    data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+    Movie/Serie/TV
+  </button>
+</h2>
+<div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
+data-bs-parent="#accordionFlushExample">
+<div class="accordion-body text-white" id="body_5"></div>
+</div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingSix">
+    <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+    data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+    Actors
+  </button>
+</h2>
+<div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix"
+data-bs-parent="#accordionFlushExample">
+<div class="accordion-body text-white">
+  <ul id="body_6"></ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingSeven">
+    <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+    data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+    Directors
+  </button>
+</h2>
+<div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven"
+data-bs-parent="#accordionFlushExample">
+<div class="accordion-body text-white">
+  <ul id="body_7">
+  </ul>
+</div>
+</div>
+</div>
+<div class="accordion-item">
+  <h2 class="accordion-header" id="flush-headingEight">
+    <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
+    data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+    Categories
+  </button>
+</h2>
+<div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight"
+data-bs-parent="#accordionFlushExample">
+<div class="accordion-body text-white">
+  <ul id="body_8">
+  </ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="subtitulo_pagina" id="nossos_dados">Nossas principais categorias</h3>
+<div class=" container d-flex justify-content-around flex-wrap mb-5 mt-5">
+  <button onclick="show('comedia')" class="btn btn-outline-danger animation">Comédia</button>
+  <button onclick="show('scifi')" class="btn btn-outline-danger  animation">Sci-fi</button>
+  <button onclick="show('acao')" class="btn btn-outline-danger  animation">Ação</button>
+  <button onclick="show('documentario')" class="btn btn-outline-danger  animation">Documentário</button>
+  <button onclick="show('drama')" class="btn btn-outline-danger  animation">Drama</button>
+  <button onclick="show('terror')" class="btn btn-outline-danger  animation">Terror</button>
+  <button onclick="show('romance')" class="btn btn-outline-danger  animation">Romance</button>
+  <button onclick="show('anime')" class="btn btn-outline-danger  animation">Anime</button>
+  <button onclick="show('kids')" class="btn btn-outline-danger  animation">Kids</button>
+  <button onclick="show('suspense')" class="btn btn-outline-danger  animation">Suspense</button>
+</div>
+<div class="d-flex flex-row justify-content-around flex-wrap " id="badge_group">
+</div>
+<h3 class="subtitulo_pagina" id="nossos_dados">Sabe qual o tamanho da nossa database? Veja abaixo!</h3>
+<div class="container">
+  <div class="row row-cols-sm-2   row-cols-md-4  mt-1 mb-5">
+    <div class="col">
+      <div class="card text-white text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
+        <div class="card-header">Titles</div>
+        <div class="card-body">
+          <h5 class="card-title" id="card_1"></h5>
+          <p class="card-text">é a quantidade atual de títulos na nossa Database.</p>
         </div>
       </div>
     </div>
-    <div class="accordion accordion-flush d-none" id="dados2">
-      <div class='animate__pulse' id="poster2"></div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingTen">
-          <button id='title2' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseOne">
-          </button>
-        </h2>
-        <div id="flush-collapseTen" class="accordion-collapse collapse show" aria-labelledby="flush-headingTen"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" id="body_9"></div>
+    <div class="col">
+      <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
+        <div class="card-header">Actors</div>
+        <div class="card-body">
+          <h5 class="card-title" id="card_2"></h5>
+          <p class="card-text">é a quantidade atual de atores na nossa Database.</p>
         </div>
       </div>
     </div>
-    <div class="accordion accordion-flush d-none" id="dados">
-      <div class='animate__pulse' id="poster"></div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingOne">
-          <button id='title' class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-            Description
-          </button>
-        </h2>
-        <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" id="body_1"></div>
+    <div class="col">
+      <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
+        <div class="card-header">Directors</div>
+        <div class="card-body">
+          <h5 class="card-title" id="card_3"></h5>
+          <p class="card-text">é a quantidade atual de diretores na nossa Database.</p>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingTwo">
-          <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-            Release Year
-          </button>
-        </h2>
-        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" id="body_2"></div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingThree">
-          <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-            Duration
-          </button>
-        </h2>
-        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" id="body_3"></div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingFour">
-          <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-            Rating (0/10)
-          </button>
-        </h2>
-        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" id="body_4"></div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingFive">
-          <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-            Movie/Serie/TV
-          </button>
-        </h2>
-        <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white" id="body_5"></div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingSix">
-          <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-            Actors
-          </button>
-        </h2>
-        <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white">
-            <ul id="body_6"></ul>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingSeven">
-          <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
-            Directors
-          </button>
-        </h2>
-        <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white">
-            <ul id="body_7">
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingEight">
-          <button class="accordion-button collapsed text-danger" type="button" data-bs-toggle="collapse"
-            data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
-            Categories
-          </button>
-        </h2>
-        <div id="flush-collapseEight" class="accordion-collapse collapse" aria-labelledby="flush-headingEight"
-          data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body text-white">
-            <ul id="body_8">
-            </ul>
-          </div>
+    </div>
+    <div class="col">
+      <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
+        <div class="card-header">Countries</div>
+        <div class="card-body">
+          <h5 class="card-title" id="card_4"></h5>
+          <p class="card-text">é a quantidade atual de países na nossa Database.</p>
         </div>
       </div>
     </div>
   </div>
-  <h3 class="subtitulo_pagina" id="nossos_dados">Nossas principais categorias</h3>
-  <div class=" container d-flex justify-content-around flex-wrap mb-5 mt-5">
-    <button onclick="show('comedia')" class="btn btn-outline-danger animation">Comédia</button>
-    <button onclick="show('scifi')" class="btn btn-outline-danger  animation">Sci-fi</button>
-    <button onclick="show('acao')" class="btn btn-outline-danger  animation">Ação</button>
-    <button onclick="show('documentario')" class="btn btn-outline-danger  animation">Documentário</button>
-    <button onclick="show('drama')" class="btn btn-outline-danger  animation">Drama</button>
-    <button onclick="show('terror')" class="btn btn-outline-danger  animation">Terror</button>
-    <button onclick="show('romance')" class="btn btn-outline-danger  animation">Romance</button>
-    <button onclick="show('anime')" class="btn btn-outline-danger  animation">Anime</button>
-    <button onclick="show('kids')" class="btn btn-outline-danger  animation">Kids</button>
-    <button onclick="show('suspense')" class="btn btn-outline-danger  animation">Suspense</button>
-  </div>
-  <div class="d-flex flex-row justify-content-around flex-wrap " id="badge_group">
-  </div>
-  <h3 class="subtitulo_pagina" id="nossos_dados">Sabe qual o tamanho da nossa database? Veja abaixo!</h3>
-  <div class="container">
-    <div class="row row-cols-sm-2   row-cols-md-4  mt-1 mb-5">
-      <div class="col">
-        <div class="card text-white text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
-          <div class="card-header">Titles</div>
-          <div class="card-body">
-            <h5 class="card-title" id="card_1"></h5>
-            <p class="card-text">é a quantidade atual de títulos na nossa Database.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
-          <div class="card-header">Actors</div>
-          <div class="card-body">
-            <h5 class="card-title" id="card_2"></h5>
-            <p class="card-text">é a quantidade atual de atores na nossa Database.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
-          <div class="card-header">Directors</div>
-          <div class="card-body">
-            <h5 class="card-title" id="card_3"></h5>
-            <p class="card-text">é a quantidade atual de diretores na nossa Database.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card text-white  text-center bg-danger mb-3 heartbeat" style="max-width: 18rem;">
-          <div class="card-header">Countries</div>
-          <div class="card-body">
-            <h5 class="card-title" id="card_4"></h5>
-            <p class="card-text">é a quantidade atual de países na nossa Database.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h3 class="subtitulo_pagina2" id="nossos_dados">Dados por Categoria</h3>
-  <div id="chart_div" class="d-flex justify-content-center"></div>
-  <h3 class="subtitulo_pagina">Entre em contato conosco</h3>
-  <div class="alert alert-danger alert-dismissible   d-none" id='alert' role="alert">
-    <strong>Ebaa!!</strong> Email enviado com sucesso!
-    <button button type="button" class="btn-close" onclick="fecharAlert()" data - bs - dismiss="alert" aria -
-      label="Close"></button>
-  </div>
-
-  <form id="contato" class="d-flex flex-column container" action="https://formspree.io/f/xeqppyrk" method="POST">
-    <div class="mb-3">
-      <label class="form-label">Seu e-mail
-        <input type="email" required class="form-control" id="email" style="text-align: center;"
-          placeholder="name@example.com" name="_replyto" /></label>
+</div>
+<h3 class="subtitulo_pagina2" id="nossos_dados">Dados por Categoria</h3>
+<div id="chart_div" class="d-flex justify-content-center"></div>
+<h3 class="subtitulo_pagina">Entre em contato conosco</h3>
+<div class="alert alert-danger alert-dismissible   d-none" id='alert' role="alert">
+  <strong>Ebaa!!</strong> Email enviado com sucesso!
+  <button button type="button" class="btn-close" onclick="fecharAlert()" data - bs - dismiss="alert" aria -
+  label="Close"></button>
+</div>
+<form id="contato" class="d-flex flex-column container" action="https://formspree.io/f/xeqppyrk" method="POST">
+  <div class="mb-3">
+    <label class="form-label">Seu e-mail
+      <input type="email" required class="form-control" id="email" style="text-align: center;"
+      placeholder="name@example.com" name="_replyto" /></label>
     </div>
     <div class="mb-3">
       <label class="form-label">Mensagem
         <textarea type="text" required name="message" class="form-control" id="textArea" style="text-align: center;"
-          placeholder="Digite aqui a sua mensagem" rows="3"></textarea>
-    </div></label>
+        placeholder="Digite aqui a sua mensagem" rows="3"></textarea>
+      </div>
+    </label>
     <button type="submit" value="Send" id='botao_email' class="btn btn-danger">Enviar</button>
   </form>
-  <div class="text-center p-3 text-white">
-    © 2020 Copyright:
-    <a class="text-white" href="https://github.com/MarcelSSouza">Marcel</a>
-    e Daniel - Universidade de Aveiro
+</div>
+<div id="filmes_paginados" class="container d-none">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Year</th>
+      </tr>
+    </thead>
+    <tbody id="titles"></tbody>
+  </table>
+  <div class="d-flex justify-content-center mb-2">
+    <button class=" btn btn-outline-danger previous disabled" onclick="anterior()" >Previous</button>
+    <button class=" btn btn-outline-danger next" onclick="proximo()">Next</button>
+    <button class=" btn btn-outline-danger" onclick="menu()">Menu</button>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-    crossorigin="anonymous"></script>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script src="./index.js"></script>
+</div>
+<div class="text-center p-3 text-white">
+  © 2020 Copyright:
+  <a class="text-white" href="https://github.com/MarcelSSouza">Marcel</a> - Universidade de Aveiro
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="./index.js"></script>
 </body>
-
 </html>
